@@ -4,8 +4,15 @@ import com.kevin.common.entity.Result;
 import com.kevin.common.enums.ResultEnum;
 import com.kevin.common.util.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindException;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.lang.reflect.Parameter;
+import java.util.List;
 
 /**
  * 异常处理器
@@ -17,19 +24,29 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class KevinExceptionHandler {
 
-    /**
-     * 自定义异常
-     */
-    @ExceptionHandler(KevinException.class)
-    public Result handleRRException(KevinException e){
-        return ResultUtil.error(e.getCode(),e.getMsg());
-    }
-
-
-
     @ExceptionHandler(Exception.class)
-    public Result handleException(Exception e){
+    public Result handleException(Exception e) {
         log.error(e.getMessage(), e);
-        return ResultUtil.error(ResultEnum.UNKNOW_ERROR);
+
+        if (e instanceof KevinException) {
+            return ResultUtil.error(e.getMessage());
+        } else if (e instanceof IllegalArgumentException) {
+            return ResultUtil.error(e.getMessage());
+        } else if (e instanceof IllegalStateException) {
+            return ResultUtil.error(e.getMessage());
+        } else if (e instanceof BindException) {
+            BindException ex = (BindException) e;
+            List<ObjectError> allErrors = ex.getAllErrors();
+            ObjectError error = allErrors.get(0);
+            String defaultMessage = error.getDefaultMessage();
+            return ResultUtil.error(defaultMessage);
+        } else if (e instanceof MethodArgumentNotValidException) {
+            MethodArgumentNotValidException ex = (MethodArgumentNotValidException) e;
+            List<ObjectError> errors = ex.getBindingResult().getAllErrors();
+            String message = errors.get(0).getDefaultMessage();
+            return ResultUtil.error(message);
+        } else {
+            return ResultUtil.error(ResultEnum.UNKNOW_ERROR);
+        }
     }
 }
