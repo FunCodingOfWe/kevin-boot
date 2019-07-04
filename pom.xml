@@ -36,6 +36,8 @@
         <lombok.version>1.18.8</lombok.version>
         <mysql.version>8.0.16</mysql.version>
         <swagger.version>1.9.0.RELEASE</swagger.version>
+        <fastjson.version>1.2.58</fastjson.version>
+        <pagehelper.version>1.2.12</pagehelper.version>
     </properties>
 
     <dependencies>
@@ -71,6 +73,18 @@
             <groupId>com.spring4all</groupId>
             <artifactId>swagger-spring-boot-starter</artifactId>
             <version>${swagger.version}</version>
+        </dependency>
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <!-- pagehelper -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
         </dependency>
 
     </dependencies>
