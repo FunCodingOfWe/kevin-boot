@@ -8,6 +8,7 @@ package com.kevin.common.enums;
  */
 public enum ResultEnum {
     UNKNOW_ERROR(500, "未知异常，请联系管理员"),
+    NO_HANDLER_FOUND_ERROR(404, "接口不存在"),
     SUCCESS(0, "成功");
 
 

@@ -11,8 +11,8 @@ public class TestJob {
 
     @Value("${name}")
     private  String name;
-    @Scheduled(fixedDelay = 5000, initialDelay = 2000)
-    private void execute() {
-        log.info(">>>>>>>>>>>> Scheduled is run !"+name);
-    }
+//    @Scheduled(fixedDelay = 5000, initialDelay = 2000)
+//    private void execute() {
+//        log.info(">>>>>>>>>>>> Scheduled is run !"+name);
+//    }
 }

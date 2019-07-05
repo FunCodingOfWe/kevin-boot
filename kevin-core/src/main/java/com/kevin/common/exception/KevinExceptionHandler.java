@@ -4,14 +4,13 @@ import com.kevin.common.entity.Result;
 import com.kevin.common.enums.ResultEnum;
 import com.kevin.common.util.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
-import java.lang.reflect.Parameter;
 import java.util.List;
 
 /**
@@ -30,6 +29,8 @@ public class KevinExceptionHandler {
 
         if (e instanceof KevinException) {
             return ResultUtil.error(e.getMessage());
+        } else if (e instanceof NoHandlerFoundException) {
+            return ResultUtil.error(ResultEnum.NO_HANDLER_FOUND_ERROR);
         } else if (e instanceof IllegalArgumentException) {
             return ResultUtil.error(e.getMessage());
         } else if (e instanceof IllegalStateException) {

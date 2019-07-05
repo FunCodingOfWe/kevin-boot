@@ -1,5 +1,7 @@
 package com.kevin.test.controller;
 
+import com.kevin.common.entity.Result;
+import com.kevin.common.util.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,7 @@ public class TestController {
 
     @ApiModelProperty("测试Swagger")
     @GetMapping("/hello")
-    private String hello() {
-        return "Hello Spring Boot";
+    private Result hello() {
+        return ResultUtil.success();
     }
 }
