@@ -15,6 +15,7 @@ public class MD5Utils {
 
     /**
      * byte[]字节数组 转换成 十六进制字符串
+     *
      * @param arr 要转换的byte[]字节数组
      * @return String 返回十六进制字符串
      */
@@ -44,6 +45,7 @@ public class MD5Utils {
 
     /**
      * 生成含有随机盐的密码
+     *
      * @param password 要加密的密码
      * @return String 含有随机盐的密码
      */
@@ -73,6 +75,7 @@ public class MD5Utils {
 
     /**
      * 验证加盐后是否和原密码一致
+     *
      * @param password 原密码
      * @param password 加密之后的密码
      * @return boolean true表示和原密码一致 false表示和原密码不一致
